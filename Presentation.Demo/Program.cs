@@ -1,3 +1,4 @@
+//This Code was made by Eng Saif:)
 using BusniessLogicLayer.Services;
 using Demo.Data_Acess_Layer.Data.Contexts;
 using Demo.Data_Acess_Layer.Repostries;
@@ -5,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Presentation.Demo
 {
+    // By far this is my best demo :D
     public class Program
     {
         public static void Main(string[] args)
