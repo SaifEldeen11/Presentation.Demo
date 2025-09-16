@@ -1,4 +1,4 @@
-﻿using BusniessLogicLayer.Services;
+﻿using BusniessLogicLayer.Services.InterFaces;
 using Demo.Data_Acess_Layer.Models;
 using Microsoft.AspNetCore.Mvc;
 

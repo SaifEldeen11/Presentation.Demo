@@ -1,5 +1,6 @@
-﻿using BusniessLogicLayer.DTOs;
+﻿using BusniessLogicLayer.DTOs.Departments;
 using BusniessLogicLayer.Factories;
+using BusniessLogicLayer.Services.InterFaces;
 using Demo.Data_Acess_Layer.Models;
 using Demo.Data_Acess_Layer.Repostries;
 

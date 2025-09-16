@@ -1,4 +1,4 @@
-﻿using BusniessLogicLayer.DTOs;
+﻿using BusniessLogicLayer.DTOs.Departments;
 using Demo.Data_Acess_Layer.Models;
 using System;
 using System.Collections.Generic;
@@ -42,9 +42,9 @@ namespace BusniessLogicLayer.Factories
         {
             return new Department
             {
-                Code= departmentDTO.Code,
-                Name= departmentDTO.Name,
-                Description= departmentDTO.Description,
+                Code = departmentDTO.Code,
+                Name = departmentDTO.Name,
+                Description = departmentDTO.Description,
                 CreatedOn = departmentDTO.DateOfCreation.ToDateTime(new TimeOnly()),
             };
         }
@@ -54,8 +54,8 @@ namespace BusniessLogicLayer.Factories
             {
                 Id = departmentDTO.Id,
                 Code = departmentDTO.Code,
-                Name= departmentDTO.Name,
-                Description= departmentDTO.Description,
+                Name = departmentDTO.Name,
+                Description = departmentDTO.Description,
                 CreatedOn = departmentDTO.DateOfCreation.ToDateTime(new TimeOnly()),
             };
         }

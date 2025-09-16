@@ -9,15 +9,13 @@ using System.Threading.Tasks;
 
 namespace Demo.Data_Acess_Layer.Data.Configrations
 {
-    internal class DepartmentConfigrations : IEntityTypeConfiguration<Department>
+    internal class DepartmentConfigrations : BaseEntityConfigrations<Department>,IEntityTypeConfiguration<Department> 
     {
-        public void Configure(EntityTypeBuilder<Department> builder)
+        public new void Configure(EntityTypeBuilder<Department> builder)
         {
             builder.Property(d => d.Id).UseIdentityColumn(10, 10);
             builder.Property(d => d.Name).HasColumnType("varchar(20)");
             builder.Property(d => d.Code).HasColumnType("varchar(20)");
-            builder.Property(d => d.CreatedOn).HasDefaultValueSql("GetDate()"); // First Time Only 
-            builder.Property(d => d.LastModifiedOn).HasComputedColumnSql("GetDate()"); // for insert and update
 
         }
     }

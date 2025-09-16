@@ -4,15 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusniessLogicLayer.DTOs
+namespace BusniessLogicLayer.DTOs.Departments
 {
-    public class DepartmentDTO
+    public class CreateDepartmentDTO
     {
-        public int Id { get; set; }
         public string Name { get; set; }= null!;
         public string Code { get; set; } = null!;
-        public string Description { get; set; } = string.Empty;
+        public string? Description { get; set; }
         public DateOnly DateOfCreation { get; set; }
-
     }
 }

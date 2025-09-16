@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusniessLogicLayer.DTOs
+namespace BusniessLogicLayer.DTOs.Departments
 {
     public class DepartmentDetailsDTO
     {

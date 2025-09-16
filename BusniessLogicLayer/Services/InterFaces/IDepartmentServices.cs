@@ -1,6 +1,6 @@
-﻿using BusniessLogicLayer.DTOs;
+﻿using BusniessLogicLayer.DTOs.Departments;
 
-namespace BusniessLogicLayer.Services
+namespace BusniessLogicLayer.Services.InterFaces
 {
     public interface IDepartmentServices
     {

@@ -1,5 +1,6 @@
 //This Code was made by Eng Saif:)
 using BusniessLogicLayer.Services;
+using BusniessLogicLayer.Services.InterFaces;
 using Demo.Data_Acess_Layer.Data.Contexts;
 using Demo.Data_Acess_Layer.Repostries;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +26,7 @@ namespace Presentation.Demo
             ));
             builder.Services.AddScoped<IDepartmentRepostiry,DepartmentRepostiry>(); // when he ask for IDepartmentRepostiry give him DepartmentRepostiry
             builder.Services.AddScoped<IDepartmentServices, DepartmentServices>();
+            //builder.Services.AddAutoMapper();
             #endregion
 
             var app = builder.Build();
@@ -54,6 +56,8 @@ namespace Presentation.Demo
         }
     }
 }
+
+
 
 
 
