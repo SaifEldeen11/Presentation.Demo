@@ -15,5 +15,8 @@ namespace Demo.Data_Acess_Layer.Genarics
         int Insert(TEntity department);
         int Remove(TEntity department);
         int Update(TEntity department);
+
+        IEnumerable<TEntity> GetEnumerable();
+        IQueryable<TEntity> GetQueryable();
     }
 }

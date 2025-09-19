@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Demo.Data_Acess_Layer.Models.Employee
 {
+    [Table("Employees")]
     public class Employees:BaseEntity
     {
         public string Name { get; set; }=null!;

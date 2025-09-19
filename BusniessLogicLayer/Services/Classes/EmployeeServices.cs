@@ -1,5 +1,7 @@
-﻿using BusniessLogicLayer.DTOs.Employee;
+﻿using AutoMapper;
+using BusniessLogicLayer.DTOs.Employee;
 using BusniessLogicLayer.Services.InterFaces;
+using Demo.Data_Acess_Layer.Models.Employee;
 using Demo.Data_Acess_Layer.Repostries.Employee.InterFaces;
 using System;
 using System.Collections.Generic;
@@ -12,64 +14,67 @@ namespace BusniessLogicLayer.Services.Classes
     public class EmployeeServices:IEmployeeServices
     {
         private readonly IEmployeeRepostiry _employeeRepostiry;
+        private readonly IMapper _mapper;
 
-        public EmployeeServices(IEmployeeRepostiry employeeRepostiry)
+        public EmployeeServices(IEmployeeRepostiry employeeRepostiry,IMapper mapper)
         {
             _employeeRepostiry = employeeRepostiry;
+            _mapper = mapper;
         }
         public IEnumerable<EmployeeDto> GetAllEmployees(bool withTracking = false)
         {
-            var employees = _employeeRepostiry.GetAll(withTracking);
-            var EmployeesToReturn = employees.Select(e => new EmployeeDto()
+            //var employees = _employeeRepostiry.GetAll(withTracking);
+            var employees = _employeeRepostiry.GetEnumerable();
+            var employeesToReturn = employees.Select(e => new EmployeeDto()
             {
-                Id = e.Id,
                 Name = e.Name,
                 Age = e.Age,
-                Email = e.Email,
-                IsActive= e.IsActive,
-                Salary = e.Salary,
-                Gender=e.Gender.ToString(),
-                EmployeeType=e.EmployeeType.ToString()
+                Email=e.Email
             });
-            return EmployeesToReturn;
+            // Tsource => src => employee
+            // TDestination => dest => EmployeeDto  
+            //var employeesToReturn = _mapper.Map<IEnumerable<Employees>, IEnumerable<EmployeeDto>>(employees);
+
+
+
+
+            return employeesToReturn;
         }
         public EmployeeDetailsDto? GetEmployeeById(int id)
         {
             var employee = _employeeRepostiry.GetById(id);
-            return employee is null ? null: new EmployeeDetailsDto()
-            {
-                Id = employee.Id,
-                Name = employee.Name,
-                Age = employee.Age,
-                Email = employee.Email,
-                PhoneNumeber=employee.PhoneNumber,
-                HiringDate =DateOnly.FromDateTime(employee.HiringDate),
-                IsActive = employee.IsActive,
-                Gender=employee.Gender.ToString(),
-                EmployeeType=employee.EmployeeType.ToString(),
-                Salary = employee.Salary,
-                CreatedBy= employee.CreatedBy,
-                CreatedOn= employee.CreatedOn,
-                LastModifiedBy= employee.LastModifiedBy,
-                LastModifiedOn= employee.LastModifiedOn
-            };
+            return employee is null ? null: _mapper.Map<Employees, EmployeeDetailsDto>(employee);
         }
 
         public int CreateEmployee(CreatedEmployeeDto employeeDto)
         {
-            throw new NotImplementedException();
+            var employee = _mapper.Map<CreatedEmployeeDto, Employees>(employeeDto);
+            return _employeeRepostiry.Insert(employee);
+        }
+        public int UpdateEmployee(UpdatedEmployeeDto updatedEmployee)
+        {
+            return _employeeRepostiry.Update(_mapper.Map<UpdatedEmployeeDto, Employees>(updatedEmployee));
         }
 
         public bool DeleteEmployee(int id)
         {
-            throw new NotImplementedException();
+            var employee = _employeeRepostiry.GetById(id);
+            if (employee is null)
+            {
+                return false;
+            }
+            employee.IsDeleted = true;
+           var result = _employeeRepostiry.Update(employee);
+            return result > 0;
+
+            #region Hard Deleted
+            //var result = _employeeRepostiry.Remove(employee);
+
+            //return result > 0; 
+            #endregion
         }
 
 
 
-        public int UpdateEmployee(UpdatedEmployeeDto updatedEmployee)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

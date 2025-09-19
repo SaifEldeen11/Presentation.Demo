@@ -17,6 +17,7 @@ namespace BusniessLogicLayer.DTOs.Employee
 
         public string? Email { get; set; }
         public string? PhoneNumeber { get; set; }
+        public string? Address { get; set; }
         public DateOnly HiringDate { get; set; }
         public string? Gender { get; set; }
         public string? EmployeeType { get; set; }

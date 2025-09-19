@@ -18,15 +18,24 @@ namespace Demo.Data_Acess_Layer.Genarics
         {
             _dbContext = dbContext;
         }
+        public IEnumerable<TEntity> GetEnumerable()
+        {
+            return _dbContext.Set<TEntity>().Where(t => t.IsDeleted != true).ToList();
+        }
+
+        public IQueryable<TEntity> GetQueryable()
+        {
+            return _dbContext.Set<TEntity>().Where(t => t.IsDeleted != true);
+        }
         public IEnumerable<TEntity> GetAll(bool WithTracking = false)
         {
             if (WithTracking)
             {
-                return _dbContext.Set<TEntity>().ToList();
+                return _dbContext.Set<TEntity>().Where(t => t.IsDeleted != true).ToList();
             }
             else
             {
-                return _dbContext.Set<TEntity>().AsNoTracking().ToList();
+                return _dbContext.Set<TEntity>().Where(t => t.IsDeleted != true).AsNoTracking().ToList();
             }
         }
         // Update
@@ -52,5 +61,6 @@ namespace Demo.Data_Acess_Layer.Genarics
         {
             return _dbContext.Set<TEntity>().Find(id);
         }
+
     }
 }
