@@ -23,21 +23,12 @@ namespace BusniessLogicLayer.Services.Classes
         }
         public IEnumerable<EmployeeDto> GetAllEmployees(bool withTracking = false)
         {
-            //var employees = _employeeRepostiry.GetAll(withTracking);
-            var employees = _employeeRepostiry.GetEnumerable();
-            var employeesToReturn = employees.Select(e => new EmployeeDto()
-            {
-                Name = e.Name,
-                Age = e.Age,
-                Email=e.Email
-            });
-            // Tsource => src => employee
+
+
             // TDestination => dest => EmployeeDto  
-            //var employeesToReturn = _mapper.Map<IEnumerable<Employees>, IEnumerable<EmployeeDto>>(employees);
-
-
-
-
+            //Tsource => src => employee
+            var employees = _employeeRepostiry.GetAll(withTracking);
+            var employeesToReturn = _mapper.Map<IEnumerable<Employees>, IEnumerable<EmployeeDto>>(employees);
             return employeesToReturn;
         }
         public EmployeeDetailsDto? GetEmployeeById(int id)

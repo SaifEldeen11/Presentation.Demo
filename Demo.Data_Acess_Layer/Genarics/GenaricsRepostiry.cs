@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,15 +18,6 @@ namespace Demo.Data_Acess_Layer.Genarics
         public GenaricsRepostiry(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
-        }
-        public IEnumerable<TEntity> GetEnumerable()
-        {
-            return _dbContext.Set<TEntity>().Where(t => t.IsDeleted != true).ToList();
-        }
-
-        public IQueryable<TEntity> GetQueryable()
-        {
-            return _dbContext.Set<TEntity>().Where(t => t.IsDeleted != true);
         }
         public IEnumerable<TEntity> GetAll(bool WithTracking = false)
         {
@@ -62,5 +54,19 @@ namespace Demo.Data_Acess_Layer.Genarics
             return _dbContext.Set<TEntity>().Find(id);
         }
 
+        public IEnumerable<TResult> GetAll<TResult>(Expression<Func<TEntity, TResult>> selector)
+        {
+            return _dbContext.Set<TEntity>().Where(t => t.IsDeleted != true).Select(selector).ToList(); 
+        }
+
+        //public IEnumerable<TEntity> GetEnumerable()
+        //{
+        //    return _dbContext.Set<TEntity>().Where(t => t.IsDeleted != true).ToList();
+        //}
+
+        //public IQueryable<TEntity> GetQueryable()
+        //{
+        //    return _dbContext.Set<TEntity>().Where(t => t.IsDeleted != true);
+        //}
     }
 }
