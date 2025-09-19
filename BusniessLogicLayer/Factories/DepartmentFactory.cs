@@ -1,5 +1,5 @@
-﻿using BusniessLogicLayer.DTOs.Departments;
-using Demo.Data_Acess_Layer.Models;
+﻿using BusniessLogicLayer.DTOs;
+using Demo.Data_Acess_Layer.Models.Department;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +18,7 @@ namespace BusniessLogicLayer.Factories
                 Id = department.Id,
                 Name = department.Name,
                 Code = department.Code,
-                Description = department.Description,
+                Description = department.Description ?? string.Empty,
                 DateOfCreation = DateOnly.FromDateTime(department.CreatedOn ?? DateTime.Now),
 
             };

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusniessLogicLayer.DTOs.Departments
+namespace BusniessLogicLayer.DTOs
 {
     public class DepartmentDetailsDTO
     {
@@ -21,17 +21,18 @@ namespace BusniessLogicLayer.DTOs.Departments
         //    IsDeleted = department.IsDeleted;
         //}
 
-        public int Id { get; set; } 
+        public int Id { get; set; }
         public string Name { get; set; } = null!;
 
         public string Code { get; set; } = null!;
         public string? Description { get; set; } = string.Empty;
 
-        public int CreatedBy { get; set; } 
+        public int CreatedBy { get; set; }
 
-        public DateOnly? CreatedOn { get; set; } 
+        public DateOnly? CreatedOn { get; set; }
+        public DateOnly? DateOfCreation { get; set; }
 
-        public int LastModifiedBy { get; set; } 
+        public int LastModifiedBy { get; set; }
         public bool IsDeleted { get; set; }
 
     }

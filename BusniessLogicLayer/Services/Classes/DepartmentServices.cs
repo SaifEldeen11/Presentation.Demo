@@ -1,8 +1,8 @@
-﻿using BusniessLogicLayer.DTOs.Departments;
+﻿using BusniessLogicLayer.DTOs;
 using BusniessLogicLayer.Factories;
-using BusniessLogicLayer.Services.InterFaces;
+//using BusniessLogicLayer.Services.InterFaces;
 using Demo.Data_Acess_Layer.Models;
-using Demo.Data_Acess_Layer.Repostries;
+using Demo.Data_Acess_Layer.Repostries.Departments.InterFaces;
 
 namespace BusniessLogicLayer.Services
 {
@@ -31,24 +31,34 @@ namespace BusniessLogicLayer.Services
             return _departmentRepostiry.Insert(departmentDto.ToEntity());
         }
 
-        public int UpdateDepartment(UpdatedDepartmentDto departmentDto)
+        public bool UpdateDepartment(UpdatedDepartmentDto departmentDto)
         {
-            return _departmentRepostiry.Update(departmentDto.ToEntity()); 
+            return _departmentRepostiry.Update(departmentDto.ToEntity()) > 0;
         }
 
         public bool DeleteDepartment(int id)
         {
             var department = _departmentRepostiry.GetById(id);
-            if(department is null)
+            if (department is null)
             {
                 return false;
             }
             else
-            { 
-              var result = _departmentRepostiry.Remove(department);
-               return result > 0 ? true : false;
+            {
+                var result = _departmentRepostiry.Remove(department);
+                return result > 0 ? true : false;
             }
 
+        }
+
+        bool IDepartmentServices.AddDepartment(CreateDepartmentDTO departmentDTO)
+        {
+            return _departmentRepostiry.Insert(departmentDTO.ToEntity()) > 0;
+        }
+
+        int IDepartmentServices.UpdateDepartment(UpdatedDepartmentDto updatedDepartmentDto)
+        {
+            return _departmentRepostiry.Update(updatedDepartmentDto.ToEntity());
         }
     }
 }
